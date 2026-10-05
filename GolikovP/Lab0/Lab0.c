@@ -12,15 +12,12 @@ void main()
 	printf("Write the coordinates of center and radius of second cycle:");
 	scanf("%lf %lf %lf", &x2, &y2, &r2);
 
-	if (r1 < 0) {
-		printf("Error");
-	}
-	if (r2 < 0) {
+	if (r1 < 0 || r2<0) {
 		printf("Error");
 	}
 	double path = sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2));
 	double sum_r = r1 + r2;
-	double min_r = sqrt(pow((r2 - r1), 2));
+	double min_r = fabs(r2-r1);
 
 	if (x1 == x2 && y1 == y2 && r1 != r2 && check == 0) {
 		printf("Circles have the same center");
@@ -34,12 +31,14 @@ void main()
 	if (min_r < path && path < sum_r && check == 0) {
 		printf("Overlaping");
 		check = 1;
-	} if (path = sum_r && path != min_r && check == 0) {
+	} if (path == sum_r && path != min_r && check == 0) {
 		printf("Tangency");
 		check = 1;
-	}  if (path = min_r && path != sum_r && check == 0) {
+	}  if (path == min_r && path != sum_r && check == 0) {
 		printf("Tangency");
 		check = 1;
+	} if ((path + r1 > r2 || path + r2 > r1) && (path == r1) || (path == r2)) {
+		printf("One circle lies inside another without touching it.")
 	}
 
 	if (check = 0) {
